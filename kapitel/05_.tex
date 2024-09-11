@@ -1,27 +1,25 @@
 \chapter{Untere Schranke} 
 \textit{\textbf{Theorem 2:} Anzahl der Schritte zur Lösung eines Worst-Case-Falls mit einer Gesamtliterzahl von n ist mindestens $\lceil log ((n+1)/5) \rceil = \Omega (log(n))$} \\
 
+Bisher haben wir nur die obere Schranke des Algorithmus betrachtet. In diesem Kapitel werden wir uns nun mit der unteren Schranke beschäftigen. \\
+
 Sei $t:=n/3$ und $(a,b,c)$ je nach Rest von $mod 3$: 
-$(a, b, c)= TODO$. 
+\begin{equation}
+    (a, b, c) = \begin{cases}
+      (t-1, t, t+1) & \text{für } t-\lfloor t\rfloor = 0, \text{i.e.,} n \equiv 0 (mod (3))\\
+      (t-(4/3), t-(1/3), t+(5/3)) & \text{für } t-\lfloor t\rfloor = 1/3, \text{i.e.,} n \equiv 1 (mod (3))\\
+      (t-(5/3), t+(1/3), t+(4/3)) & \text{für } t-\lfloor t\rfloor = 2/3, \text{i.e.,} n \equiv 2 (mod (3))
+    \end{cases}
+ \end{equation}
+Allgemein: $(t+d_1, t+d_2, t+d_3)$ mit $d_1<d_2<d_3$. \\
 
-Dann können wir das ganze verallgemeinern zu einer Konfiguration nach $i$ Schritten: 
-Nach 1 Schritt haben wir entweder $(2𝑡+2𝑑_1, 𝑑_2−𝑑_1, 𝑡+𝑑_3)$ oder $(2𝑡+2𝑑_1, 𝑡+𝑑_2, 𝑑_3−𝑑_1)$ oder  $(𝑡+𝑑_1, 2𝑡+2𝑑_2,𝑑_3−𝑑_2 )  = (𝑥_1, 𝑡+𝑦_1, 2𝑡+𝑧_1)$.
-Allg nach i Schritten: $(𝑥_𝑖, 𝑡+𝑦_𝑖, 2𝑡+𝑧_𝑖)$.
-Dann extrahieren wir daraus Werte $u$, $v$, $w$ und überlegen uns was dafür gilt: 
-Seien ${𝑢_𝑖, 𝑣_𝑖, 𝑤_𝑖 }={|𝑥_𝑖 |, |𝑦_𝑖 |, |𝑧_𝑖 |}$ und $𝑢_𝑖≤𝑣_𝑖≤𝑤_𝑖$. 
-Für $𝑖=1$ können wir direkt überprüfen dass 𝑤_𝑖≤5/3∗2 und $𝑣_𝑖≤5/3∗2 −1/3$ ist. Allg gilt $𝑤_𝑖≤2𝑤_(𝑖−1)$ und $𝑣_𝑖≤𝑣_(𝑖−1)+𝑤_(𝑖−1)$. 
-Durch Induktion erhalten wir $𝑢_𝑖≤𝑣_𝑖≤𝑤_𝑖≤5/3∗2^𝑖$ und $𝑣_𝑖≤5/3∗2^𝑖  −1/3$. 
-⇒ $𝑣_𝑖+𝑤_𝑖≤5/3∗2^(𝑖+1)  −1/3$.
+Dies können wir verallgemeinern zu einer Konfiguration nach $i$ Schritten. Nach 1 Schritt haben wir entweder $(2t+2d_1, d_2-d_1,t+d_3)$ oder $(2t+2d_1, t+d_2, d_3-d_1)$ oder $(t+d_1, 2t+2d_2,d_3-d_2)=(x_1, t+y_1, 2t+z_1)$.
+Allgemein haben wir nach i Schritten: $(x_i, t+y_i, 2t+z_i)$. Daraus extrahieren wir die Werte $u$, $v$, $w$ und überlegen uns was dafür gilt. \\ 
+Seien ${u_i, v_i, w_i }={|x_i |, |y_i |, |z_i |}$ und $u_i\leq v_i\leq w_i$. 
+Für $i=1$ können wir direkt überprüfen dass $w_i\leq 5/3*2$ und $v_i\leq 5/3*2 -1/3$ ist. Allgemein gilt $w_i \leq 2w_{i-1}$ und $v_i\leq v_{i-1}+w_{i-1}$. Durch Induktion erhalten wir $u_i\leq v_i\leq w_i\leq 5/3*2^i$ und $v_i\leq 5/3*2^i  -1/3$ $\Rightarrow v_i+w_i\leq 5/3*2^(i+1) -1/3$. \\
 
-Solange $𝑣_𝑖+𝑤_𝑖<𝑡$ ist, können keine zwei der drei Zahlen die Summe 𝑡 ergeben, so dass 𝑎,𝑏,𝑐 nicht gleich sein können. 
-Der einzige Weg zu einer Konfig, die eine $0$ enthält, führt jedoch über eine Konfig mit zwei gleichen Zahlen.
-Somit ist $𝑣_𝑖+𝑤_𝑖≥𝑡=𝑛/3$ eine notwendige Bedingung für $(𝑥_𝑖, 𝑡+𝑦_𝑖, 2𝑡+𝑧_𝑖)$, die Konfig nach Schritt $i$, die zwei gleiche Zahlen enthält. 
+Solange $v_i+w_i<t$ ist, können keine zwei der drei Zahlen die Summe $t$ ergeben, so dass $a, b, c$ nicht gleich sein können. Der einzige Weg zu einer Konfiguration, die eine $0$ enthält, führt jedoch über eine Konfiguration mit zwei gleichen Zahlen. Somit ist $v_i+w_i \geq t=n/3$ eine notwendige Bedingung für $(x_i, t+y_i, 2t+z_i)$, die Konfiguration nach Schritt $i$, die zwei gleiche Zahlen enthält. \\ 
 
-=> Bedingung ist nicht erfüllt, solange diese beiden äquivalenten Ungleichungen wahr bleiben: $5/3∗2^(𝑖+1)  −1/3<𝑛/3  ⟺𝑖+1<log⁡〖(𝑛+1)/5〗$.
-Folglich muss jede Schrittzahl $k$, die uns eine Chance bietet, zwei gleiche Zahlen zu erhalten, $𝑘+1≥log⁡〖(((𝑛+1))/5)〗$ erfüllen. 
-
-= $𝑘≥ ⌈log⁡((𝑛+1)/5)  ⌉−1$. Erst nach mindestens $k$ Schritten könnten zwei gleiche Zahlen in unserer Konfiguration auftauchen. 
-Ein zusätzlicher Schritt mit diesen beiden Zahlen ist dann erforderlich, um eine Null zu erzeugen. Daher ist die Mindestanzahl der Schritte mindestens $⌈log⁡(((𝑛+1))/5) ⌉= Ω(log⁡𝑛)$. 
-
-V+w<t bedeutet für uns dass keine zwei zahlen von u,v,w t ergeben können (weil $u<v<w$). Dadurch können $a,b,c$ nicht gleich sein weil wenn es $a==b$ sein soll dann müsste x>=t sein (bei $a==c$ noch mehr obv.) und bei $b==c$ müsste $y>=$ 
----> stimmt so aber dabei gilt nicht $x=u$, $y=v$ und $z=w$!!
+Unsere Bedingung ist nicht erfüllt, solange diese beiden äquivalenten Ungleichungen wahr bleiben: $5/3*2^{i+1} -1/3<n/3  \Leftrightarrow i+1<log((n+1)/5)$. \\
+Folglich muss jede Schrittzahl $k$, die uns eine Chance bietet, zwei gleiche Zahlen zu erhalten, $k+1\geq log(((n+1))/5)$ erfüllen. $\Rightarrow k\geq \lceil log((n+1)/5)  \rceil-1$. \\
+Erst nach mindestens $k$ Schritten könnten zwei gleiche Zahlen in unserer Konfiguration auftauchen. Ein zusätzlicher Schritt mit diesen beiden Zahlen ist dann erforderlich, um eine Null zu erzeugen. Daher ist die Mindestanzahl der Schritte mindestens $\lceil log(((n+1))/5) \rceil= \Omega (log(n))$.
