@@ -1,0 +1,27 @@
+\documentclass[a4paper, 11pt]{scrreprt}
+\input{settings}
+\input{data}
+
+\addbibresource{quellen/citavi.bib}
+\begin{document}
+%\listoftodos[ToDos]
+
+\pagenumbering{roman}
+\input{seiten/cover}
+\tableofcontents
+\addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
+\listoffigures
+\newpage
+\pagenumbering{arabic}
+\input{kapitel/01_}
+\input{kapitel/02_}
+\input{kapitel/03_}
+\input{kapitel/04_}
+%\input{kapitel/05_}
+\input{kapitel/06_}
+\input{kapitel/07_}
+
+\chapter*{Literaturverzeichnis}
+\addcontentsline{toc}{chapter}{Literaturverzeichnis}
+\printbibliography[heading=none]
+\end{document}

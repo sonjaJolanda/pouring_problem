@@ -1,0 +1,19 @@
+\chapter{Obere Schranke und Beweis für die Gültigkeit des Algorithmus} 
+\textit{\textbf{Theorem 1:} Die optimale Anzahl von Schritten zur Lösung einer Instanz mit einer Gesamtliteranzahl von $n$ ist begrenzt durch $N(n) \leq (log(n))^2$.} \\
+
+Im folgenden Abschnitt beweisen wir dass unser Algorithmus nur gültige Konfigurationen erreicht und erläutern die obere Schranke des Algorithmus. \\
+
+Dafür schauen wir uns die Schritte an, in welchen der Algorithmus die Konfigurationen verändert. Zuerst betrachten wir dabei Fall 1 genauer. \\
+Wir müssen beweisen dass sowohl $b$ als auch $c$ aus der Anfangskonfiguration nach dem Umschütten groß genug sind um niemals negativ zu werden und so alle Schritte dieser Runde als gültig zu erklären. Für $b$ können wir einfach unsere Beobachtung $b-pa>=0$ nutzen (zur Erinnerung: $p=\lfloor b/a \rfloor$). 
+Für $c$ haben wir $c-\sum_{i=0}^{k} (1-p_i) 2^i a = c-\sum_{i=0}^{k-1} (1-p_i) 2^i a = c-(\sum_{i=0}^{k-1} (2^i) - \sum_{i=0}^{k-1} (p_i 2^i))a \geq c-2^k a \geq 0$, bei der die letzte Ungleichheit aus $k=\lfloor log(p)\rfloor$ und $a \leq c$ resultiert. 
+Wir schließen daraus, dass diese Runde machbar ist und zu einem Tripel führt, dessen kleinste Zahl höchstens $b-pa \leq a/2$  ist, wie gefordert. Die Anzahl der Schritte dieser Runde ist genau $k+1 = \lfloor log(p)\rfloor +1\leq \lfloor log(q)\rfloor +1$. \\
+
+Als nächstes betrachten wir auch Fall 2 etwas genauer. Auch hier müssen wir beweisen dass diese $\ell$ Schritte tatsächlich möglich sind indem wir zeigen dass $b$ und $c$ groß genug sind. Dies ist der Fall, da wir auf der einen Seite $q \leq p+1$ haben und dadurch $b-(q-2^\ell)a \geq b-(q-2^0)a \geq b-pa \geq 0$ gilt, 
+und auf der anderen Seite $c - \sum_{i=0}^{\ell -1} (1-q_i)2^ia \geq c-\sum_{i=0}^{\ell -1} (2^ia) = b-(2^\ell-1)a \geq b-(q-1)a \geq b-pa \geq 0$. Der letzte Schritt ist möglich, da $2^\ell a-(b-qa+2^\ell a)=qa-b \geq 0$.
+Auch diese Runde ist machbar und endet mit genau $\ell+1=\lfloor log(q)\rfloor+1$ Schritten. Die erste Nummer des Tripels ist nun genau $qa-b<a/2$. \\
+
+Wir haben gezeigt, wie man in beiden Fällen eine gültige Runde ausführt mit max $\lfloor log(q)\rfloor +1\leq \lfloor log(n/1)\rfloor +1$ Schritten, die mit einem Tripel $(a', b', c')$ endet, dessen kleinste Nummer maximal $a'\leq a/2$ ist. \\
+Wie jede Konfiguration in aufsteigender Reihenfolge erfüllt die Anfangskonfiguration die Bedingungen $a \leq n/3$. Deshalb ist sichergestellt dass wir nach maximal $log(n-1)$ Runden eine Konfiguration erreichen, dessen kleinste Nummer maximal $n/3 * 2^{1-log(n)}=2/3 \approx 0$ ist. \\
+Es reicht also aus, diesen gesamten Prozess für höchstens $\lfloor log(q)\rfloor -1$ Runden zu iterieren, und am Ende erhalten wir eine endgültige Konfiguration, deren kleinste Zahl $0$ ist. Die Gesamtanzahl der Schritte über alle Runden ist höchstens $(log(n)-1)*(log(n)+1) \leq (log(n))^2$. 
+
+\autocite{Frei.2020} % ToDo wo überall die Quelle hinzufügen, oder das irgendwo ganz am Anfang einfach rein schreiben?
